@@ -1,0 +1,71 @@
+DROP TABLE IF EXISTS sessions;
+CREATE TABLE sessions (
+  `token` CHAR(43) PRIMARY KEY,
+  `data` LONGBLOB NOT NULL,
+  `expiry` TIMESTAMP(6) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` TIMESTAMP NULL
+);
+
+CREATE INDEX sessions_expiry_idx ON sessions (expiry);
+
+DROP TABLE IF EXISTS recipes;
+CREATE TABLE recipes (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(255),
+  `image` VARCHAR(255),
+  `content` TEXT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` TIMESTAMP NULL
+);
+
+CREATE INDEX recipes_name_idx ON recipes (name);
+
+DROP TABLE IF EXISTS ingredients;
+CREATE TABLE ingredients (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100),
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` TIMESTAMP NULL
+);
+
+CREATE INDEX ingredients_name_idx ON ingredients (name);
+
+DROP TABLE IF EXISTS  recipe_ingredient;
+CREATE TABLE recipe_ingredient (
+  `recipe_id` INT,
+  `ingredient_id` INT,
+  `quantity` INT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` TIMESTAMP NULL,
+  PRIMARY KEY (recipe_id, ingredient_id),
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
+  FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+);
+
+DROP TABLE IF EXISTS images;
+CREATE TABLE images (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `data` LONGBLOB,
+  `recipe_id` INT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` TIMESTAMP NULL,
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+);
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100),
+  `email` VARCHAR(100),
+  `password` VARCHAR(100),
+  `activated` BOOLEAN DEFAULT TRUE,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` TIMESTAMP NULL
+);
