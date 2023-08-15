@@ -1,11 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1 style="color: aqua;">Welcome to CookingRecipe</h1>
-</body>
-</html>
+{{ extends "./layouts/master.html" }}
+
+{{ block pageContent() }}
+
+<div class="card-header">
+    <div class="card-body">
+        <div class="row d-flex justify-content-between">
+            <div class="col-lg-5" style="margin-left: 18px; margin-bottom: 20px">
+                <div id="user-group">
+                    <select id="category-list" data-placeholder="Sắp xếp" class="form-control border border-black px-2"
+                        name="user_id" style="max-width: 200px">
+                        <option value=""></option>
+                        <option class=" active" value="all" data-categories="" selected>
+                            Chọn tất cả
+                        </option>
+                        <option class="" value="" data-categories="">
+                            Phổ biến
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 align-content-center">
+                <div class="form-search mt-1 px-3 d-flex input-group input-group-outline">
+                    <input id="search" type="text" class="form-control" placeholder="Tìm kiếm nhanh..." name="search"
+                        autocomplete="off" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive" id="table-book">
+    {{ include "./content.html" }}
+</div>
+
+{{ end }}

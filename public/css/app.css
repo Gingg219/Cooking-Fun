@@ -1,0 +1,139 @@
+.img_block {
+    position: relative;
+    padding-bottom: 100%;
+    display: block;
+}
+
+.img_block_book {
+    position: relative;
+    padding-bottom: 133%;
+    display: block;
+}
+
+.img_block_book img, .img_block img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-position: center;
+    object-fit: cover;
+}
+.select2-container .select2-selection--single {
+    height: 100% !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: unset !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 100% !important;
+}
+span.select2-search.select2-search--inline {
+    line-height: normal !important;
+}
+.notication {
+    width: 500px;
+    height: 20px;
+}
+.h-400 {
+    max-height: 400px;
+}
+
+
+/* ------------- CSS phần kéo thả file -------------------*/
+.drag-area {
+    position: relative;
+    border: 2px dashed #333;
+    border-radius: 5px;
+    padding: 30px 60px;
+    width: 100%;
+}
+
+.drag-area .drag-area-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.drag-area:hover {
+    cursor: pointer;
+}
+
+.drag-area p {
+    color: #000;
+    font-size: 18px;
+}
+
+.drag-area.active{
+    border: 2px solid #999;
+}
+
+.drag-area.drag-drop{
+    border: 2px dotted #000;
+}
+
+.drag-area.active:hover {
+    cursor: inherit;
+}
+
+.drag-area .icon {
+    font-size: 70px;
+    color: #ccc;
+    height: auto;
+    width: auto;
+}
+
+.drag-area .btn-delete {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #fff;
+    border: none;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    background-image: linear-gradient(195deg, #EF5350 0%, #E53935 100%);
+    border-radius: 50%;
+    box-shadow: 0 3px 3px 0 rgba(244, 67, 53, 0.15), 0 3px 1px -2px rgba(244, 67, 53, 0.2), 0 1px 5px 0 rgba(244, 67, 53, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.drag-area.active .btn-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drag-area.active .btn-delete:hover {
+    transform: translateY(-3px);
+    background-color: #F44335;
+    border-color: #F44335;
+    box-shadow: 0 14px 26px -12px rgba(244, 67, 53, 0.4), 0 4px 23px 0 rgba(244, 67, 53, 0.15), 0 8px 10px -5px rgba(244, 67, 53, 0.2);
+    cursor: pointer;
+}
+
+.drag-area .file-info {
+    display: none;
+    font-size: 18px;
+    color: #000;
+}
+
+.drag-area.active .file-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drag-area.active .drag-area-content {
+    display: none;
+}
+
+.drag-area .file-info span {
+    margin-left: 5px;
+}
+
+.downloadFile:hover{
+    box-shadow: 0 14px 26px -12px rgba(244, 67, 53, 0.4), 0 4px 23px 0 rgba(244, 67, 53, 0.15), 0 8px 10px -5px rgba(244, 67, 53, 0.2);
+}

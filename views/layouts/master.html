@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{ include "./header.html" }}
+
+    <body class="g-sidenav-show bg-gray-200" style="height: 100%">
+        <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+            {{ include "./navbar.html" }}
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!--  Content -->
+                            {{ yield pageContent() }}
+                        </div>
+                    </div>
+                </div>        
+            </div>
+            <!-- Footer -->
+            <div class="container-fluid mt-4" style="justify-content:end">
+                {{ include "./footer.html" }}
+            </div>
+        </main>
+        <!-- Jquery -->
+        <script src="public/js/jquery.min.js"></script>
+        <script src="public/js/twitter-bootstrap.min.js"></script>
+        <script src="public/js/moment.min.js"></script>
+        <script src="public/js/daterangepicker.min.js"></script>
+        <!-- Core JS Files -->
+        <script src="public/js/core/popper.min.js"></script>
+        <script src="public/js/core/bootstrap.min.js"></script>
+        <script src="public/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="public/js/plugins/smooth-scrollbar.min.js"></script>
+        <script>
+            var win = navigator.platform.indexOf('Win') > -1;
+            if (win && document.querySelector('#sidenav-scrollbar')) {
+                var options = {
+                    damping: '0.5'
+                }
+                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+        </script>
+        <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="public/js/material-dashboard.min.js?v=3.1.0"></script>
+    </body>
+</html>
