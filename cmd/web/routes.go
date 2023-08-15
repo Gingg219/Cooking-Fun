@@ -18,11 +18,19 @@ func (a *application) routes() http.Handler {
 	if a.debug {
 		mux.Use(loggingMiddleware)
 	}
-
+	//User Route
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
-		a.session.Put(r.Context(), "test", "TuanNV")
 		err := a.render(w, r, "home", nil)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}).Methods("GET")
+
+	//Admin
+	mux.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
+
+		err := a.render(w, r, "admin/recipes/index", nil)
 		if err != nil {
 			log.Fatal(err)
 		}

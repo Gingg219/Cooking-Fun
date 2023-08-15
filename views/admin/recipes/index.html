@@ -1,0 +1,48 @@
+{{ extends "../../layouts/master.html" }}
+
+{{ block pageContent() }}
+
+    <div class="card-header">
+        <div class="card-body">
+            <div class="row d-flex justify-content-end">
+                <div class="col-lg-3 align-content-center">
+                    <div class="form-search mt-1 px-3 d-flex input-group input-group-outline">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Create Recipe
+                        </button>
+                        {{ include "./create_modal.html" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive" id="table-book">
+    </div>
+
+{{ end }}
+
+{{ block script() }}
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Quill Handler -->
+    <script>
+
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['link', 'image'],
+            [{ 'header': '3' }]
+        ];
+        var quill = new Quill('#editor', {
+            modules: {
+                toolbar: {
+                    container: toolbarOptions,
+                }
+            },
+            placeholder: 'Compose an epic...',
+            theme: 'snow'
+        });
+    </script>
+
+{{ end }}
