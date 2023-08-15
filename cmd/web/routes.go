@@ -5,18 +5,17 @@ import (
 
 	"net/http"
 
-	"github.com/CloudyKit/jet/v6"
 	"github.com/gorilla/mux"
 
 	"github.com/rs/cors"
 )
 
 func (a *application) routes() http.Handler {
-	
+
 	mux := mux.NewRouter()
 
 	mux.Use(a.LoadSession)
-	if a.debug{
+	if a.debug {
 		mux.Use(loggingMiddleware)
 	}
 
@@ -29,19 +28,10 @@ func (a *application) routes() http.Handler {
 		}
 	}).Methods("GET")
 
-	mux.HandleFunc("/cooking", func(w http.ResponseWriter, r *http.Request) {
+	//Static files
+	fs := http.StripPrefix("/public/",  http.FileServer(http.Dir("../../public")))
+	mux.PathPrefix("/public/").Handler(fs).Methods("GET")
 
-		vars := make(jet.VarMap)
-		vars.Set("testSession", a.session.GetString(r.Context(), "test"))
-		err := a.render(w, r, "cooking", vars)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}).Methods("GET")
-
-	fileServer := http.FileServer(http.Dir("../../public"))
-	mux.Handle("/public/*", http.StripPrefix("/public", fileServer))
-	
 	// Setup CORS
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:80"},
