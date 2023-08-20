@@ -38,3 +38,18 @@ func (m RecipesModel) Get(id int) (*Recipe, error) {
 
 	return &u, nil
 }
+
+func (m RecipesModel) Insert(r *Recipe) (error, int) {
+
+	r.CreatedAt = time.Now()
+
+	col := m.db.Collection(m.getNameTable())
+	_, err := col.Insert(r)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+    newRecipeID := r.ID
+	
+	return nil, newRecipeID
+}

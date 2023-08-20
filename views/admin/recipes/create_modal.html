@@ -1,18 +1,42 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Recipe</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div id="editor">
+            <form action="" id="formRecipe" method="POST">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8 mb-2">
+                            <label class="labels">Name</label><span class="text-danger"> *</span>
+                            <input type="text" class="form-control border border-info p-2" name="name"
+                                placeholder="Title" value="">
+                        </div>
+                        <div class="col-md-8 mb-2">
+                            <label class="labels">Ingredient</label><span class="text-danger"> *</span>
+                            <select class="select2 select2-multiple ingredient form-control border border-info p-2"
+                            name="ingredients[]" data-toggle="select2" multiple="multiple" data-placeholder="Choose or enter ..." style="width: 100%">
+                                {{ range ingredients }}
+                                <option value="{{ .Name }}">{{ .Name }}</option>
+                                {{ end }}
+                            </select>
+                        </div>
+                        <div class="col-md-8 mb-2">
+                            <label class="labels">Image</label><span class="text-danger"> *</span>
+                            <input type="file" class="form-control border border-info p-2" name="image"
+                                placeholder="Title" value="">
+                        </div>
+                    </div> 
+                    <div id="editor">
+                    </div>
+                    <textarea type="text" name="content" id="recipeContent" hidden></textarea>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form> 
       </div>
     </div>
 </div>

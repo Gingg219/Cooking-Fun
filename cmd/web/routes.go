@@ -28,13 +28,8 @@ func (a *application) routes() http.Handler {
 	}).Methods("GET")
 
 	//Admin
-	mux.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
-
-		err := a.render(w, r, "admin/recipes/index", nil)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}).Methods("GET")
+	mux.HandleFunc("/admin", a.getAllIngredient).Methods("GET")
+	mux.HandleFunc("/admin/recipe/store", a.storeRecipe).Methods("POST")
 
 	//Static files
 	fs := http.StripPrefix("/public/",  http.FileServer(http.Dir("../../public")))
