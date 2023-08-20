@@ -7,9 +7,9 @@ import (
 )
 
 type RecipeIngredient struct {
-	Recipe_ID     int       `db:"recipe_id,omitempty"`
-	Ingredient_ID int       `db:"ingredient_id"`
-	Quantity      int       `db:"email"`
+	RecipeID     int       `db:"recipe_id"`
+	IngredientID int       `db:"ingredient_id"`
+	Quantity      int       `db:"quantity"`
 	CreatedAt     time.Time `db:"created_at"`
 }
 
@@ -19,4 +19,16 @@ func (m RecipeIngredientsModel) getNameTable() string {
 
 type RecipeIngredientsModel struct {
 	db db.Session
+}
+
+func (m RecipeIngredientsModel) Insert(ri *RecipeIngredient) error {
+
+	ri.CreatedAt = time.Now()
+
+	col := m.db.Collection(m.getNameTable())
+	_, err := col.Insert(ri)
+	if err != nil {
+		return err
+	}
+	return nil
 }
